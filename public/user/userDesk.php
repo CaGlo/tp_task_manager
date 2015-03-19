@@ -6,11 +6,6 @@ use tache\Modele\Tache;
 use tache\Controller\TacheController;
 
 $task = new Tache();
-
-
-
-
-
 $taskList = $bdd->query('SELECT titre,description,echeance,temps_passe,temps_prev,id_tache FROM user_tache ut LEFT JOIN tache t on (ut.id_tache = t.id) WHERE id_user = 6 AND etat =0')->fetchAll();
 ?>
 
