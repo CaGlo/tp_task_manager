@@ -6,8 +6,8 @@ if(!isset($_SESSION))
     header('location: ../index.php');
 }elseif(isset($_SESSION['role']) && $_SESSION['role'] != "CDP")
 {
-    var_dump($_SESSION);
-//    header('location: ../index.php');
+    
+    header('location: ../index.php');
 }
         
 
@@ -20,7 +20,7 @@ $listesTaches = $taches->ListesTaches();
 $taches->postTache($_GET);
 require_once '../template/header.php';
 ?>
-<<<<<<< HEAD
+
 
 <!DOCTYPE html>
 <html lang="">
@@ -55,8 +55,7 @@ require_once '../template/header.php';
   <?php
   include("../menu.php");
  ?>
-=======
->>>>>>> 475ed2133596929e56cf2ec69218050c72dcaadf
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 ">
