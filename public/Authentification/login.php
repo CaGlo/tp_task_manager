@@ -16,9 +16,19 @@ if(isset($_POST["Login"]) && isset($_POST["Password"]))
     {
         
         session_start();
+        $_SESSION['id_user'] = $user->getId();
         $_SESSION['login'] = $user->getLogin();
         $_SESSION['role'] = $user->getRole();
+
+       
+        echo json_encode("OK");
+              
+    }else
+    {       
+        echo json_encode("FALSE");
+
         header("Location: index.php");
+
     }
     
 }

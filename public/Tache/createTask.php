@@ -1,5 +1,15 @@
 <?php
 
+session_start();
+
+if(isset($_SESSION))
+{
+    header('location: ../index.php');
+}elseif(isset($_SESSION['role']) && $_SESSION['role'] != "CDP")
+{
+    header('location: ../index.php');
+}
+        
 
 require_once '../../application/autoload.php';
 
@@ -16,6 +26,6 @@ if(isset($_POST))
     
     $tacheC = new TacheController($arrayPost);
     $tacheC->addTache();
-    header("location: index.php");
+    header("location: add.php");
     
 }
