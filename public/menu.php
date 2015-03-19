@@ -17,7 +17,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="#">Home</a></li>
-                            <li><a href="Tache/add.php">Creation tâche</a></li>
+                            <li><a href="http://localhost/tp_task_manager/public/Tache/add.php" >Creation tâche</a></li>
                             <li><a href="#contact">Contact</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -36,7 +36,7 @@
                       
                         <div class="navbar-form pull-right">
                             <span class="span2"><?php echo "Hello ". $_SESSION['login']." "; ?> </span>
-                            <span class="span2"><a href="Authentification/logout.php">Se deconnecter</a></span>
+                            <span class="span2"><a href="http://localhost/tp_task_manager/public/Authentification/logout.php">Se deconnecter</a></span>
                         </div>
                         
                         

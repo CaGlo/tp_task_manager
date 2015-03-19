@@ -36,10 +36,23 @@ class Users {
     
     public function findAllUser()
     {
-        $reqBDD = null;
+         $role_id; 
+         try {
+                       
+            $reqBDD = $this->bdd->prepare("SELECT id FROM role WHERE libelle = 'user'");
+            $reqBDD->execute();
+            $res = $reqBDD->fetch(\PDO::FETCH_ASSOC);        
+           
+            $role_id = $res['id'];
+//            return $res;
+        } catch (Exception $e) {
+            die("Erreur SQL !! ");
+        }
+        
         try {
                        
-            $reqBDD = $this->bdd->prepare("SELECT * FROM users WHERE id_role = 2");
+            $reqBDD = $this->bdd->prepare("SELECT * FROM users WHERE id_role = :role");
+            $reqBDD->bindParam(":role",$role_id);
             $reqBDD->execute();
             $res = $reqBDD->fetchAll(\PDO::FETCH_ASSOC);
             
@@ -142,7 +155,19 @@ class Users {
     }
 
     public function getRole() {
-        return $this->role;
+         $role = $this->role;
+        try {
+                       
+            $reqBDD = $this->bdd->prepare("SELECT libelle FROM role WHERE id = :role");
+            $reqBDD->bindParam(":role",$role);
+            $reqBDD->execute();
+            $res = $reqBDD->fetch(\PDO::FETCH_ASSOC);        
+           
+            return $res['libelle'];
+//            return $res;
+        } catch (Exception $e) {
+            die("Erreur SQL !! ");
+        }
     }
     
      public function setRole($role) {

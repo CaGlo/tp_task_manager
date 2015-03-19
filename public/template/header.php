@@ -24,14 +24,13 @@ $list_users = $user->listUsers();
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="../css/bootstrap.min_1.css">
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
         
         <link rel="stylesheet" href="../css/main.css">
-          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="../js/vendor/bootstrap.min.js"></script>
         <script src="../js/vendor/bootstrap.js"></script>
@@ -83,7 +82,7 @@ $list_users = $user->listUsers();
                         ?>
                         <div class="navbar-form pull-right">
                             <span class="span2"><?php echo "Hello ". $_SESSION['login']." "; ?> </span>
-                            <span class="span2"><a href="logout.php">Se deconnecter</a></span>
+                            <span class="span2"><a href="http://localhost/tp_task_manager/public/Authentification/logout.php">Se deconnecter</a></span>
                         </div>
                         
                         <?php } ?>

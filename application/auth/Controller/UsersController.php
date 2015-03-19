@@ -53,7 +53,7 @@ class UsersController
         $login = $this->getLogin();
         $pass = $this->getPassword();
         $res = $user->findByLogin($login);        
-       
+        
 //        $this->id = 
         if(!empty($res))
         { 

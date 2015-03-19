@@ -2,9 +2,12 @@
 
 
 
-if(!isset($_SESSION['login']))
+if(!isset($_SESSION))
 {
-     header('Location: ../Authentification/index.php');
+    header('location: ../index.php');
+}elseif(isset($_SESSION['role']) && $_SESSION['role'] != "CDP")
+{
+    header('location: ../index.php');
 }
 
 require_once '../../application/autoload.php';
@@ -33,8 +36,8 @@ $list_users = $user->listUsers();
         <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
         
         <link rel="stylesheet" href="../css/main.css">
-          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="../js/vendor/bootstrap.min.js"></script>
         <script src="../js/vendor/bootstrap.js"></script>
