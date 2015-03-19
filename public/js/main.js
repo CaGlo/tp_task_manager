@@ -10,8 +10,9 @@ $(document).ready(function()
                 login: $("#username").val(),
                 password: $("#password").val()
         };
-        console.log(data);
-        console.log(url);
+        var urlHost      = window.location.href;     // Returns full URL
+        var urlToRedirect = urlHost.split("index");
+       
     $.ajax({
             url: url,
             data: data,
@@ -28,10 +29,12 @@ $(document).ready(function()
                     
                     if(result == "CDP")
                     {
-                        document.location.href="http://localhost/tp_task_manager/public/Tache/index.php";
+                        var redirectURL = urlToRedirect[0] + "Tache/index.php";
+                        document.location.href=""+redirectURL+"";
                     }else if(result == "user")
                     {
-                        document.location.href="http://localhost/tp_task_manager/public/user/index.php";
+                        var redirectURL = urlToRedirect[0] + "user/index.php";
+                        document.location.href=""+redirectURL+"";
                     }
                     
                 }else if(result == "FALSE")

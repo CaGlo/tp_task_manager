@@ -37,8 +37,17 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
   <?php
-  include('menu.php')
+  include('menu.php');
+  
+  $urlEx = explode('/', $_SERVER['PHP_SELF']);
+  $urlBase = $urlEx[1];
   ?>
+        
+        
+<?php 
+if(!isset($_SESSION['login']))
+{
+?>        
 <div class="container">
     <div class="row">
 		<div class="span4 offset4 well">
@@ -57,7 +66,26 @@
 		</div>
 	</div>
 </div>
-        
+<?php
+}elseif(isset($_SESSION['login']))
+{
+    ?>
+<div class="container">
+    <div class="row">
+		<div class="span4 offset4 well">
+                <legend>You're online !</legend>
+          	<div id="error_login" class="alert alert-success">
+                <a class="close" data-dismiss="alert" href="#">×</a>Welcome <?php echo $_SESSION['login']; ?>
+            </div>
+                <form>
+			<!--<input type="text" id="username" class="span4" name="username" placeholder=<?php echo $_SESSION['login']; ?>  >-->
+			<!--<input type="password" id="password" class="span4" name="password" placeholder="Password">-->
+                        <a href='<?php echo '/'.$urlBase; ?>/public/Authentification/logout.php' class="btn btn-danger btn-block" >Se deconnecter</a>
+			</form>    
+		</div>
+	</div>
+</div>
+<?php } ?>
 
         <script src="js/vendor/bootstrap.min.js"></script>
 
