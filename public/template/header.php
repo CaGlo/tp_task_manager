@@ -1,16 +1,11 @@
-<?php session_start(); 
+<?php
+session_start(); 
 if(!isset($_SESSION['login']))
 {
      header('Location: ../Authentification/index.php');
 }
-
 require_once '../../application/autoload.php';
 
-use auth\Controller\UsersController;
-
-$user = new UsersController();
-
-$list_users = $user->listUsers();
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -56,7 +51,7 @@ $list_users = $user->listUsers();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Project name</a>
+                    <a class="brand" >Gestion de tache </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="#">Home</a></li>
