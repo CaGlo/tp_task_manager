@@ -82,10 +82,11 @@ $list_users = $user->listUsers();
                 <div class="controls">
                   <select id="usermultiple" name="usermultiple[]" class="input-medium" multiple="multiple">
                       <?php 
-                        
+                         
                    foreach($list_users as $user)
                    {
-                       echo "<option value='".$user['id_user']."'>".ucfirst($user['nom'])." ".ucfirst($user['prenom'])."</option>";
+                      
+                       echo "<option value='".$user['id']."'>".ucfirst($user['nom'])." ".ucfirst($user['prenom'])."</option>";
 
                    }
 

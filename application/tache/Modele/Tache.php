@@ -45,7 +45,7 @@ class Tache{
     {
          try {
             $reqBDD = $this->bdd->prepare("INSERT INTO tache VALUES"
-                    . " ('',:titre,:description,:echeance,:temps_prev,'0')");
+                    . " ('',:titre,:description,:echeance,:temps_prev,'1')");
             $reqBDD->bindParam(':titre', $this->titre);
             $reqBDD->bindParam(':description', $this->description);
             $reqBDD->bindParam(':echeance', $this->echeance);
@@ -176,8 +176,6 @@ class Tache{
 
      public function findAllTachesForUser()
     {
-        
-        $reqBDD = null;
         try {
                     
             $reqBDD = $this->bdd->prepare(

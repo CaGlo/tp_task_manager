@@ -11,12 +11,23 @@ if(isset($_SESSION))
 }
         
 
+if(!isset($_SESSION))
+{
+    header('location: ../index.php');
+}elseif(isset($_SESSION['role']) && $_SESSION['role'] != "CDP")
+{
+    header('location: ../index.php');
+}
+        
+
 require_once '../../application/autoload.php';
 
 use tache\Controller\TacheController;
  
 if(isset($_POST))
 {
+    
+    
     $arrayPost = array();
     $arrayPost['titre'] = $_POST['titre'];
     $arrayPost['description'] = $_POST['description'];
