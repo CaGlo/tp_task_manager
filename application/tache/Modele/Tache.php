@@ -245,10 +245,10 @@ class Tache{
         try {
                     
             $reqBDD = $this->bdd->prepare(
-                    "SELECT SEC_TO_TIME(SUM(temps_passe)) AS time FROM user_tache WHERE id_tache = :id_tache");
+                    "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(temps_passe))) AS time FROM user_tache WHERE id_tache = :id_tache");
             $reqBDD->bindParam(':id_tache', $id, \PDO::PARAM_INT);  
             $reqBDD->execute();
-            $res = $reqBDD->fetchAll(\PDO::FETCH_ASSOC);  
+            $res = $reqBDD->fetchAll(\PDO::FETCH_ASSOC); 
             return $res;
         } catch (Exception $e) {
             die("Erreur SQL !! ");
