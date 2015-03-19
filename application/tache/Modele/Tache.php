@@ -249,7 +249,6 @@ class Tache{
             $reqBDD->bindParam(':id_tache', $id, \PDO::PARAM_INT);  
             $reqBDD->execute();
             $res = $reqBDD->fetchAll(\PDO::FETCH_ASSOC); 
-            var_dump($res);
             return $res;
         } catch (Exception $e) {
             die("Erreur SQL !! ");
