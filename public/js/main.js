@@ -9,6 +9,8 @@ $(document).ready(function()
                 login: $("#username").val(),
                 password: $("#password").val()
         };
+        console.log(data);
+        console.log(url);
     $.ajax({
             url: url,
             data: data,

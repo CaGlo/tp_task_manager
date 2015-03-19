@@ -3,13 +3,14 @@
 
 require_once '../../application/autoload.php';
 
-use auth\Modele\UsersController;
+use auth\Controller\UsersController;
 
-if(isset($_POST["Login"]) && isset($_POST["Password"]))
+if(isset($_POST["login"]) && isset($_POST["password"]))
 {
     
-    $login = $_POST["Login"];
-    $pass = $_POST["Password"];
+    $login = $_POST["login"];
+    $pass = $_POST["password"];
+   
     $user = new UsersController('',$login,$pass,'','','');
     
     if($user->login() != false)
@@ -27,7 +28,8 @@ if(isset($_POST["Login"]) && isset($_POST["Password"]))
     {       
         echo json_encode("FALSE");
 
-        header("Location: index.php");
+        
+        
 
     }
     
