@@ -60,7 +60,7 @@ class Users {
             $reqBDD->execute();
             $res = $reqBDD->fetch(\PDO::FETCH_ASSOC);
             
-            $this->id = $res["id_user"];
+            $this->id = $res["id"];
             $this->login = $res["login"];
             $this->password = $res["password"];
             $this->nom = $res['nom'];
@@ -87,7 +87,7 @@ class Users {
             $reqBDD->execute();
             $res = $reqBDD->fetch(\PDO::FETCH_ASSOC);
             
-            $this->id = $res["id_user"];
+            $this->id = $res["id"];
             $this->login = $res["login"];
             $this->password = $res["password"];
             $this->nom = $res['nom'];
@@ -167,7 +167,8 @@ class Users {
             $reqBDD = $this->bdd->prepare("SELECT * "
                     . "FROM tache as T, user_tache as UT "
                     . "WHERE UT.id_tache = T.id"
-                    . " AND UT.id = :id");
+                    . " AND UT.id = :id"
+                    . " AND T.etat = 0");
 //            $reqBDD = $this->bdd->prepare("SELECT T.id, T.titre, T.description,"
 //                    . " T.echeance, T.temps_prev,"
 //                    . " T.etat"

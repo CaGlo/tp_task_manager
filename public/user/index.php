@@ -1,46 +1,18 @@
 <?php
-require_once '../../application/autoload.php';
-include '../../application/connexionBdd.php';
+//require_once '../../application/autoload.php';
+//include '../../application/connexionBdd.php';
+require_once '../template/header.php';
 
 use tache\Modele\Tache;
 use tache\Controller\TacheController;
+use auth\Modele\Users;
 
-$task = new Tache();
-$taskList = $bdd->query('SELECT titre,description,echeance,temps_passe,temps_prev,id_tache FROM user_tache ut LEFT JOIN tache t on (ut.id_tache = t.id) WHERE id_user = 6 AND etat =0')->fetchAll();
+$user = new Users();
+$user->findById(6);
+$user->setArrayTacheDB();
+
+
 ?>
-
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
-        <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="../css/main.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script language="JavaScript" type="text/javascript" src="../js/chrono.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
 
         <div class="container">
 
@@ -48,7 +20,7 @@ $taskList = $bdd->query('SELECT titre,description,echeance,temps_passe,temps_pre
             <div class="hero-unit">
                 <h1>Liste de vos tâches</h1>
                 <?php
-                if (empty($taskList)) {
+                if (!$user->getArrayTache()) {
                     echo "<p>Aucune tâche ne vous a été assignée pour le moment</p>";
                 } else {
 
@@ -59,7 +31,8 @@ $taskList = $bdd->query('SELECT titre,description,echeance,temps_passe,temps_pre
                     . '<th>Temps écoulé</th>'
                     . '<th>Temps prévu</th>';
 
-                    foreach ($taskList as $tasks) {
+                    foreach ($user->getArrayTache()['tache'] as $tasks) {
+                        //var_dump($tasks->id);
                         $exp_temps = explode(":", $tasks['temps_passe']);
                         echo '<tr class="tache" data-hour=' . $exp_temps[0] . ' data-minute=' . $exp_temps[1] . ' data-seconde=' . $exp_temps[2] . ' data-taskid=' . $tasks['id_tache'] . ' data-titre="' . $tasks['titre'] . '" data-toggle="modal" data-target="#basicModal" data-backdrop="static" >';
                         echo '<td>' . $tasks['titre'] . '</td>';
@@ -112,13 +85,6 @@ $taskList = $bdd->query('SELECT titre,description,echeance,temps_passe,temps_pre
 
 
         </div> <!-- /container -->
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-
-        <script src="../js/vendor/bootstrap.min.js"></script>
-
-        <script src="../js/plugins.js"></script>
-        <script src="../js/main.js"></script>
+    <?php  require_once '../template/footer.php';?>
     </body>
 </html>
