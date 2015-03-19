@@ -4,8 +4,9 @@ $(function() {
     var minute = 0;
     var heure = 0;
     var already_play = false;
+    var userid = $("#refresh").data('id');
     function raz() {
-        $.ajax({type:'POST',url:'../chrono/test.php',data:{etat: 1, tache: taskid},async:false});
+        $.ajax({type: 'POST', url: '../chrono/test.php', data: {etat: 1, tache: taskid}, async: false});
     }
     function timer() {
         sec++;
@@ -39,7 +40,7 @@ $(function() {
     }
     function saveTime() {
         var time = "" + $("#heure").html() + $("#minute").html() + $("#seconde").html();
-        $.post('../chrono/test.php', {user: 2, temps: time, tache: taskid});
+        $.post('../chrono/test.php', {user: userid, temps: time, tache: taskid});
         save = setTimeout(saveTime, 10000);
     }
     function lock() {
@@ -101,7 +102,6 @@ $(function() {
         $("#seconde").html(":" + sSec);
     });
     $(window).unload(function() {
-        console.log('salut');
         if (already_play) {
             already_play = false;
             clearTimeout(save);
@@ -112,7 +112,19 @@ $(function() {
         raz();
         location.reload();
     });
-
+    $(".fini").click(function(e) {
+        e.stopPropagation();
+        $.post(
+                '../chrono/test.php',
+                {etat: 3, tache: $(this).data('tid')},
+                function(data) {
+                    alert("Cette tache est maintenant terminé. Bravo !");
+                }
+        );
+    });
+    $("#refresh").click(function() {
+        location.reload();
+    });
 });
 
 

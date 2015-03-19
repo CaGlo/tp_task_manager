@@ -195,7 +195,8 @@ class Users {
             $reqBDD = $this->bdd->prepare("SELECT * "
                     . "FROM tache as T, user_tache as UT "
                     . "WHERE UT.id_tache = T.id"
-                    . " AND UT.id = :id");
+                    . " AND UT.id = :id"
+                    . " AND T.etat = 1");
             $reqBDD->bindParam(":id",$this->id);
             $reqBDD->execute();
            $res = $reqBDD->fetchAll(\PDO::FETCH_ASSOC);

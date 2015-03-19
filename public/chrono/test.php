@@ -3,7 +3,8 @@
 try {
 
 require_once '../../application/autoload.php';
-include '../../application/connexionBdd.php';
+
+$bdd = new \PDO('mysql:host=localhost;dbname=tp_gestion_tache;charset=utf8', 'root', '');
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
@@ -13,7 +14,7 @@ if (isset($_POST['user']) && isset($_POST['tache']) && isset($_POST['temps'])) {
     $time = $_POST['temps'];
     $tache = $_POST['tache'];
     $query = 'UPDATE user_tache SET temps_passe =\''
-            . $time . '\' WHERE id_user =' . $user . ' AND id_tache =' . $tache;
+            . $time . '\' WHERE id =' . $user . ' AND id_tache =' . $tache;
     $bdd->exec($query);
     echo $query;
 }
