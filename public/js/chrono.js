@@ -7,6 +7,9 @@ $(function() {
     function raz() {
         $.ajax({type:'POST',url:'../chrono/test.php',data:{etat: 0, tache: taskid},async:false});
     }
+    
+    
+    
     function timer() {
         sec++;
         if (sec > 59) {
