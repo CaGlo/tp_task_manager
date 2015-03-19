@@ -8,8 +8,9 @@ use tache\Controller\TacheController;
 use auth\Modele\Users;
 
 $user = new Users();
-$user->findById(6);
+$user->findById(7);
 $user->setArrayTacheDB();
+$taskList = $user->getArrayTache();
 
 
 ?>
@@ -20,7 +21,7 @@ $user->setArrayTacheDB();
             <div class="hero-unit">
                 <h1>Liste de vos tâches</h1>
                 <?php
-                if (!$user->getArrayTache()) {
+                if (!$taskList['tache']) {
                     echo "<p>Aucune tâche ne vous a été assignée pour le moment</p>";
                 } else {
 
@@ -31,7 +32,7 @@ $user->setArrayTacheDB();
                     . '<th>Temps écoulé</th>'
                     . '<th>Temps prévu</th>';
 
-                    foreach ($user->getArrayTache()['tache'] as $tasks) {
+                    foreach ($taskList['tache'] as $tasks) {
                         //var_dump($tasks->id);
                         $exp_temps = explode(":", $tasks['temps_passe']);
                         echo '<tr class="tache" data-hour=' . $exp_temps[0] . ' data-minute=' . $exp_temps[1] . ' data-seconde=' . $exp_temps[2] . ' data-taskid=' . $tasks['id_tache'] . ' data-titre="' . $tasks['titre'] . '" data-toggle="modal" data-target="#basicModal" data-backdrop="static" >';

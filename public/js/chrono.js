@@ -5,7 +5,7 @@ $(function() {
     var heure = 0;
     var already_play = false;
     function raz() {
-        $.ajax({type:'POST',url:'../chrono/test.php',data:{etat: 0, tache: taskid},async:false});
+        $.ajax({type:'POST',url:'../chrono/test.php',data:{etat: 1, tache: taskid},async:false});
     }
     function timer() {
         sec++;
@@ -43,7 +43,7 @@ $(function() {
         save = setTimeout(saveTime, 10000);
     }
     function lock() {
-        $.post('../chrono/test.php', {etat: 1, tache: taskid});
+        $.post('../chrono/test.php', {etat: 2, tache: taskid});
     }
     $("#play").click(function() {
         if (!already_play) {
