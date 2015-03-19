@@ -1,10 +1,11 @@
 <?php
-require_once '../template/header.php';
+//
+require_once '..\..\application\autoload.php';
 use tache\Controller\TacheController;
 $taches = new TacheController();
 $listesTaches = $taches->ListesTaches();
 $taches->postTache($_GET);
-
+require_once '../template/header.php';
 ?>
     <div class="container-fluid">
       <div class="row">

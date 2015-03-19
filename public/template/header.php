@@ -1,11 +1,16 @@
-<?php
-session_start(); 
+<?php session_start(); 
 if(!isset($_SESSION['login']))
 {
      header('Location: ../Authentification/index.php');
 }
+
 require_once '../../application/autoload.php';
 
+use auth\Controller\UsersController;
+
+$user = new UsersController();
+
+$list_users = $user->listUsers();
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -19,6 +24,7 @@ require_once '../../application/autoload.php';
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
+        <link rel="stylesheet" href="../css/bootstrap.min_1.css">
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
@@ -50,7 +56,7 @@ require_once '../../application/autoload.php';
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" >Gestion de tache </a>
+                    <a class="brand" href="#">Project name</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="#">Home</a></li>
