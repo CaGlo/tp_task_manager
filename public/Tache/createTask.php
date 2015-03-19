@@ -2,7 +2,7 @@
 
 session_start();
 
-if(isset($_SESSION))
+if(!isset($_SESSION))
 {
     header('location: ../index.php');
 }elseif(isset($_SESSION['role']) && $_SESSION['role'] != "CDP")
@@ -17,6 +17,8 @@ use tache\Controller\TacheController;
  
 if(isset($_POST))
 {
+    
+    
     $arrayPost = array();
     $arrayPost['titre'] = $_POST['titre'];
     $arrayPost['description'] = $_POST['description'];
