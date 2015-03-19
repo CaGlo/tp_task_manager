@@ -15,7 +15,7 @@ class TacheController {
     public function ListesTaches() {
 
         $taches= new Tache;
-
+       
         if(!empty($taches->getUserTaches())){
            
             
@@ -28,10 +28,10 @@ class TacheController {
 //                var_dump($value['temps totaux'][0]['time']);
                 $value['temps restant']= $this->tempsRestantPourtache($value['temps_prev'],$value['temps totaux'][0]['time']);
                 $tacheTab[]=$value;
-            }
-            
+    }
+
             return $tacheTab;
-        }
+}
         return false;
     }
     

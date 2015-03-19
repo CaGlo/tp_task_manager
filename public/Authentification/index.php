@@ -23,12 +23,8 @@
         </style>
         <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="../css/main.css">
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-        <script src="../js/vendor/bootstrap.min.js"></script>
-        <script src="../js/plugins.js"></script>
-        <script src="../js/main.js"></script>
+
+        <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -36,10 +32,7 @@
         <![endif]-->
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-  <?php
-   if(isset($_SESSION['login']))
-   {
-   ?>
+
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
@@ -48,11 +41,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Task Manager</a>
+                    <a class="brand" href="#">Project name</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="#">Home</a></li>
-                            <li><a href="../Tache/add.php">Creation tâche</a></li>
+                            <li><a href="#about">About</a></li>
                             <li><a href="#contact">Contact</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -67,43 +60,57 @@
                                 </ul>
                             </li>
                         </ul>
-                       
-                      
+                        <?php
+                        
+                        if(!isset($_SESSION['login']))
+                        {
+                            ?>
+                            <form action="login.php" method="POST"  class="navbar-form pull-right" >
+                            <input name="Login" class="span2" type="text" placeholder="Login">
+                            <input name="Password" class="span2" type="password" placeholder="Password">
+                            <button type="submit" class="btn">Sign in</button>
+                            </form>
+                        <?php
+                        }else{
+                        ?>
                         <div class="navbar-form pull-right">
-                            <span class="span2"><?php echo "Hello ". $_SESSION['login']." "; ?> </span>
-                            <span class="span2"><a href="logout.php">Se deconnecter</a></span>
+                            <span class="span2"><?php echo "Hello : ". $_SESSION['login']." "; ?> </span>
+                            <a href="logout.php">Se deconnecter</a>
                         </div>
                         
-                        
+                        <?php } ?>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
-<?php } ?>
-<div class="container">
-    <div class="row">
-		<div class="span4 offset4 well">
-                <legend>Please Sign In</legend>
-          	<div id="error_login" class="alert alert-error hide">
-                <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Username or Password!
+
+        <div class="container">
+
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div class="hero-unit">
+                <h1>Hello, world!</h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
             </div>
-                <form id="login" action="login.php" method="POST" accept-charset="UTF-8">
-			<input type="text" id="username" class="span4" name="username" placeholder="Username">
-			<input type="password" id="password" class="span4" name="password" placeholder="Password">
-            <label class="checkbox">
-            	<input type="checkbox" name="remember" value="1"> Remember Me
-            </label>
-                        <button id="login_submit" type="submit" name="submit" class="btn btn-info btn-block">Sign in</button>
-			</form>    
-		</div>
-	</div>
-</div>
-        
 
-        <script src="../js/vendor/bootstrap.min.js"></script>
-
-        <script src="../js/plugins.js"></script>
-                        
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="span4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div>
+                <div class="span4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+               </div>
+                <div class="span4">
+                    <h2>Heading</h2>
+                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div>
+            </div>
 
             <hr>
 
@@ -113,5 +120,12 @@
 
         </div> <!-- /container -->
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
+
+        <script src="../js/vendor/bootstrap.min.js"></script>
+
+        <script src="../js/plugins.js"></script>
+        <script src="../js/main.js"></script>
     </body>
 </html>
