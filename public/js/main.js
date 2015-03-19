@@ -4,26 +4,27 @@ $(document).ready(function()
     $( "#login" ).submit(function(event) {
         
         event.preventDefault();
-
-        var url = "login.php";
+        var url = $( "#login" ).attr('action');
         var data = {
                 login: $("#username").val(),
                 password: $("#password").val()
         };
-console.log(data);
+        console.log(data);
+        console.log(url);
     $.ajax({
             url: url,
             data: data,
             type: 'POST',
             success: function(response){
-               
+               console.log(response);
                 var result = jQuery.parseJSON(response);
+                console.log(result);
                 if(result == "OK")
                 {
                     $("#error_login").removeClass("");
                     $("#error_login").addClass("alert-success");
                     $("#error_login").html("Authentification Réussi !");
-                    document.location.href="index.php";
+                    window.location.href = "index.php";
                 }else if(result == "FALSE")
                 {
                      $("#error_login").show();
