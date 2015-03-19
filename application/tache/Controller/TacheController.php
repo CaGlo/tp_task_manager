@@ -9,14 +9,14 @@ class TacheController {
     
     
     function __construct($tacheTab = null) {
+        
         $this->tacheTab = $tacheTab;
     }
 
-    public function ListesTaches() {
-
-        $taches= new Tache;
-
-        if(!empty($taches->getUserTaches())){
+public function ListesTaches() {  
+        $taches= new Tache();
+       $v= $taches->getUserTaches();
+        if(!empty($v)){
            
             
             foreach ($taches->findAllTachesForUser() as $key  => $value) {
@@ -24,8 +24,6 @@ class TacheController {
                 $value['echeance']   = $this->date( $value['echeance']);
                 $value['description']   = $this->taille( $value['description']);
                 $value['temps totaux'] = $taches->sommeTempPasserTache($value['id_tache']);
-//                var_dump($value['temps_prev']);
-//                var_dump($value['temps totaux'][0]['time']);
                 $value['temps restant']= $this->tempsRestantPourtache($value['temps_prev'],$value['temps totaux'][0]['time']);
                 $tacheTab[]=$value;
             }
@@ -52,7 +50,6 @@ class TacheController {
         }
     }
     
-  
     public function date($param) {
         
         $dateCut = explode('-', $param);
@@ -71,7 +68,11 @@ class TacheController {
                 
         if(!empty($param)){
             if($param['tache'] == 'modif'){
-                
+                if((int)!empty($param['idTache']) || (int)!empty($param['idTache'])){
+                    return $taches->findTachesForUser($param['idTache'],$param['idUser']);
+                }else{
+                    header('location:index.php');
+                }
             }
             if($param['tache'] == 'supp'){
                 
@@ -89,7 +90,7 @@ class TacheController {
         
         if($timeExe < $checkTime ){
             $second =($checkTime - $timeExe);
-            $diff = 'il reste encore du temps'.$this->ConverSecondToTie($second);
+            $diff = '<span class="text-success">Il reste encore du temps: '.$this->ConverSecondToTie($second).'</span>';
         
         return $diff ;  
         }
@@ -97,7 +98,7 @@ class TacheController {
             $second =($timeExe-$checkTime);
             $this->CalculePourcentage($checkTime,$timeExe);
             $pourcent=$this->CalculePourcentage($checkTime,$timeExe);
-            $diff = 'vous avez depasser le temps '. $this->ConverSecondToTie($second).' sois de '.sprintf('%.2f',$pourcent).'%';
+            $diff = '<span class="text-danger">le temps est depassé de:<br/> '. $this->ConverSecondToTie($second).' sois de <b>'.sprintf('%.2f',$pourcent).'%</b></span>';
         
         return $diff ;  
         }
@@ -131,10 +132,7 @@ class TacheController {
     
     public function CalculePourcentage($tempsRealistion, $tempsExecution) {
         
-
-       $pourcent=($tempsExecution*100)/$tempsRealistion;
        $pourcent=(($tempsExecution-$tempsRealistion) /$tempsRealistion) * 100;
-       
         if(20<$pourcent){
             return $pourcent;
         }

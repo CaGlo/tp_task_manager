@@ -22,6 +22,7 @@ class Tache{
         $this->bdd = \Connexion::getInstance();
         $this->listesTaches();
         $this->userTaches();
+        
 
     }
 
@@ -208,6 +209,26 @@ class Tache{
         }
     }
 
+    public function findTachesForUser($tache, $user)
+    {
+        
+        $reqBDD = null;
+        try {
+                    
+            $reqBDD = $this->bdd->prepare(
+                    "SELECT ut.temps_passe ,ut.id_user, ut.id_tache, t.id as tacheId, t.titre, t.description, t.echeance, t.temps_prev, t.etat, u.id as userId, u.login, u.password, u.nom, u.prenom, u.id_role "
+                    . "FROM user_tache as ut "
+                    . "join tache as t on ut.id_tache = :idTache and t.id = :idTache "
+                    . "join users as u on ut.id_user = :idUser and u.id = :idUser");
+            $reqBDD->bindParam(":idTache", $tache, \PDO::PARAM_INT);
+            $reqBDD->bindParam(":idUser", $user, \PDO::PARAM_INT);
+            $reqBDD->execute();
+            $res = $reqBDD->fetchAll(\PDO::FETCH_ASSOC);  
+            return $res;
+        } catch (Exception $e) {
+            die("Erreur SQL !! ");
+        }
+    }
    public function delete($id) {
         $sql = "DELETE FROM tache WHERE id =  :id_tache";
             $stmt = $this->bdd->prepare($sql);

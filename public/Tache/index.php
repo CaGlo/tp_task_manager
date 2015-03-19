@@ -1,9 +1,9 @@
 <?php
+//
 require_once '..\..\application\autoload.php';
 use tache\Controller\TacheController;
-//var_dump("dada");die();
 $taches = new TacheController();
-
+$listesTaches = $taches->ListesTaches();
 $taches->postTache($_GET);
 
 ?>
@@ -65,9 +65,9 @@ $taches->postTache($_GET);
                 </tr>
               </thead>
               <tbody>
-            <?php if(!empty($taches->ListesTaches())): ?>
+            <?php if(!empty($listesTaches)): ?>
             <?php foreach ($taches->ListesTaches() as $key => $value) : ?>
-                  <?php //var_dump($taches->ListesTaches()) ?>
+                  
                 <tr>
                   <td><?php echo $value['id_tache'] ?></td>
                   <td><?php echo $value['titre'] ?></td>
