@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Chrono</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="../js/vendor/jquery-1.8.3.min.js"></script>
+        <script src="../js/vendor/bootstrap.js"></script>
+        <script src="../js/plugins.js"></script>
+    </head>
+    <body>
+        <script>
+
+            $(function() {
+                var sec = 00;
+                var minute = 00;
+                var heure = 0;
+                var already_play = false;
+                function raz() {
+                    $.post('test.php', {etat: 0, tache: 5});
+                }
+                function timer() {
+                    sec++;
+                    if (sec > 59) {
+                        sec = 0;
+                        minute++;
+                    }
+                    if (minute > 59) {
+                        minute = 0;
+                        heure++;
+                    }
+                    if (sec < 10) {
+                        sSec = "0" + sec;
+                    } else {
+                        sSec = sec;
+                    }
+                    if (minute < 10) {
+                        sMinute = "0" + minute;
+                    } else {
+                        sMinute = minute;
+                    }
+                    if (heure < 10) {
+                        sHeure = "0" + heure;
+                    } else {
+                        sHeure = heure;
+                    }
+                    $("#heure").html(sHeure);
+                    $("#minute").html(":" + sMinute);
+                    $("#seconde").html(":" + sSec);
+                    compte = setTimeout(timer, 1000);
+                }
+                function saveTime() {
+                    var time = "" + $("#heure").html() + $("#minute").html() + $("#seconde").html();
+                    $.post('test.php', {user: 6, temps: time, tache: 5});
+                    save = setTimeout(saveTime, 10000);
+                }
+                function lock() {
+                    $.post('test.php', {etat: 1, tache: 5});
+                }
+                $("#play").click(function() {
+                    if (!already_play) {
+                        already_play = true;
+                        lock();
+                        timer();
+                        saveTime();
+                    }
+                });
+                $("#pause").click(function() {
+                    already_play = false;
+                    clearTimeout(save);
+                    saveTime();
+                    clearTimeout(save);
+                    clearTimeout(compte);
+                });
+                $("#close,#stop").click(function() {
+                    if (already_play) {
+                        already_play = false;
+                        clearTimeout(save);
+                        saveTime();
+                        clearTimeout(save);
+                        clearTimeout(compte);
+                    }
+                    raz();
+                    if (!$(this).is($("#close"))) {
+                        $("#close").trigger('click');
+                    }
+                });
+
+            });
+
+        </script>
+
+        <a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal">Click to open Modal</a>
+        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Chrono</button>
+                        <h4 class="modal-title" id="myModalLabel">Tache 5</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="alert" class="alert-block">
+                            <div id="chrono">
+                                <span id="heure"></span>
+                                <span id="minute"></span>
+                                <span id="seconde"></span>
+                            </div>
+                            <div>
+                                <span id="play" class="glyphicon glyphicon-play btn btn-large btn-primary"></span>
+                                <span id="pause" class="glyphicon glyphicon-pause btn btn-large btn-primary"></span>
+                                <span id="stop" class="glyphicon glyphicon-stop btn btn-large btn-primary"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
