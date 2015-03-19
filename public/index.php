@@ -14,21 +14,21 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
         </style>
-        <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/main.css">
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-        <script src="/js/vendor/bootstrap.min.js"></script>
-        <script src="/js/plugins.js"></script>
-        <script src="/js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -52,7 +52,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="#">Home</a></li>
-                            <li><a href="/Tache/add.php">Creation tâche</a></li>
+                            <li><a href="Tache/add.php">Creation tâche</a></li>
                             <li><a href="#contact">Contact</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -100,9 +100,9 @@
 </div>
         
 
-        <script src="/js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
 
-        <script src="/js/plugins.js"></script>
+        <script src="   js/plugins.js"></script>
                         
 
             <hr>
